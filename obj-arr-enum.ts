@@ -4,6 +4,9 @@
 // enum (Constant identifiers)
 // any (Any kind of value can be assigned)
 // union (Assign multi type values)
+// Function and () => datatype
+// unknown
+// never
 
 // const person: {
 //   name: string;
