@@ -1,11 +1,15 @@
 "use strict";
 var Department = /** @class */ (function () {
-    function Department(n) {
+    function Department(deptId, deptName) {
+        this.deptId = deptId;
+        this.deptName = deptName;
+        //   deptName: string;
         this.employees = [];
-        this.deptName = n;
+        this.deptId = deptId;
+        this.deptName = deptName;
     }
     Department.prototype.describe = function () {
-        console.log("The department is: ", this.deptName);
+        console.log("The department is: ", this.deptId, this.deptName);
     };
     Department.prototype.addEmployee = function (empName) {
         this.employees.push(empName);
@@ -15,10 +19,10 @@ var Department = /** @class */ (function () {
     };
     return Department;
 }());
-var itDepartment = new Department("IT");
+var itDepartment = new Department("Dept_01", "IT");
 itDepartment.addEmployee("A. Moiz");
 itDepartment.addEmployee("Lakhani");
-itDepartment.employees[2] = "Test User"; // We should avoid this kind of data addition in real apps.
+// itDepartment.employees[2] = "Test User"; // We should avoid this kind of data addition in real apps.
 itDepartment.describe();
 itDepartment.printEmployeeInfo();
 //# sourceMappingURL=app.js.map

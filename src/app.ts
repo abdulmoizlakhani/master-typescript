@@ -1,13 +1,14 @@
 class Department {
-  deptName: string;
-  employees: string[] = [];
+  //   deptName: string;
+  private employees: string[] = [];
 
-  constructor(n: string) {
-    this.deptName = n;
+  constructor(private readonly deptId: string, public deptName: string) {
+    this.deptId = deptId;
+    this.deptName = deptName;
   }
 
   describe(this: Department) {
-    console.log("The department is: ", this.deptName);
+    console.log("The department is: ", this.deptId, this.deptName);
   }
 
   addEmployee(empName: string) {
@@ -19,12 +20,12 @@ class Department {
   }
 }
 
-const itDepartment = new Department("IT");
+const itDepartment = new Department("Dept_01", "IT");
 
 itDepartment.addEmployee("A. Moiz");
-itDepartment.addEmployee("Lakhani")
+itDepartment.addEmployee("Lakhani");
 
-itDepartment.employees[2] = "Test User"; // We should avoid this kind of data addition in real apps.
+// itDepartment.employees[2] = "Test User"; // We should avoid this kind of data addition in real apps.
 
 itDepartment.describe();
 itDepartment.printEmployeeInfo();
