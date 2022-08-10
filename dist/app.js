@@ -23,6 +23,9 @@ var Department = /** @class */ (function () {
         this.deptId = deptId;
         this.deptName = deptName;
     }
+    Department.createEmployee = function (name) {
+        return { name: name };
+    };
     Department.prototype.describe = function () {
         console.log("The department is: ", this.deptId, this.deptName);
     };
@@ -32,6 +35,7 @@ var Department = /** @class */ (function () {
     Department.prototype.printEmployeeInfo = function () {
         console.log(this.employees, this.employees.length);
     };
+    Department.fiscalYear = 2022;
     return Department;
 }());
 var ITDepartment = /** @class */ (function (_super) {
@@ -91,4 +95,5 @@ accountingDepartment.printReports();
 accountingDepartment.mostRecentReport = "Test Report 02";
 console.log(itDepartment, accountingDepartment);
 console.log(accountingDepartment.mostRecentReport);
+console.log(Department.createEmployee("A. Moiz"), Department.fiscalYear);
 //# sourceMappingURL=app.js.map
