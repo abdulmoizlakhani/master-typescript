@@ -1,4 +1,8 @@
 "use strict";
+// class Department {
+//   //   deptName: string;
+//   protected employees: string[] = [];
+//   static fiscalYear = 2022;
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,6 +18,23 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+//   constructor(private readonly deptId: string, public deptName: string) {
+//     this.deptId = deptId;
+//     this.deptName = deptName;
+//   }
+//   static createEmployee(name: string) {
+//     return { name };
+//   }
+//   describe(this: Department) {
+//     console.log("The department is: ", this.deptId, this.deptName);
+//   }
+//   addEmployee(empName: string) {
+//     this.employees.push(empName);
+//   }
+//   printEmployeeInfo() {
+//     console.log(this.employees, this.employees.length);
+//   }
+// }
 var Department = /** @class */ (function () {
     function Department(deptId, deptName) {
         this.deptId = deptId;
@@ -25,9 +46,6 @@ var Department = /** @class */ (function () {
     }
     Department.createEmployee = function (name) {
         return { name: name };
-    };
-    Department.prototype.describe = function () {
-        console.log("The department is: ", this.deptId, this.deptName);
     };
     Department.prototype.addEmployee = function (empName) {
         this.employees.push(empName);
@@ -46,6 +64,9 @@ var ITDepartment = /** @class */ (function (_super) {
         _this.admins = admins;
         return _this;
     }
+    ITDepartment.prototype.describe = function () {
+        console.log("The department is: ", this.deptId, this.deptName);
+    };
     return ITDepartment;
 }(Department));
 var AccountingDepartment = /** @class */ (function (_super) {
@@ -56,6 +77,9 @@ var AccountingDepartment = /** @class */ (function (_super) {
         _this.lastReport = reports[0];
         return _this;
     }
+    AccountingDepartment.prototype.describe = function () {
+        console.log("The department is: ", this.deptId, this.deptName);
+    };
     Object.defineProperty(AccountingDepartment.prototype, "mostRecentReport", {
         get: function () {
             if (this.lastReport) {
@@ -93,6 +117,8 @@ accountingDepartment.addEmployee("John Doe");
 accountingDepartment.addReport("Test Report 01");
 accountingDepartment.printReports();
 accountingDepartment.mostRecentReport = "Test Report 02";
+itDepartment.describe();
+accountingDepartment.describe();
 console.log(itDepartment, accountingDepartment);
 console.log(accountingDepartment.mostRecentReport);
 console.log(Department.createEmployee("A. Moiz"), Department.fiscalYear);

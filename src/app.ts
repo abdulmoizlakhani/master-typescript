@@ -1,9 +1,36 @@
-class Department {
+// class Department {
+//   //   deptName: string;
+//   protected employees: string[] = [];
+//   static fiscalYear = 2022;
+
+//   constructor(private readonly deptId: string, public deptName: string) {
+//     this.deptId = deptId;
+//     this.deptName = deptName;
+//   }
+
+//   static createEmployee(name: string) {
+//     return { name };
+//   }
+
+//   describe(this: Department) {
+//     console.log("The department is: ", this.deptId, this.deptName);
+//   }
+
+//   addEmployee(empName: string) {
+//     this.employees.push(empName);
+//   }
+
+//   printEmployeeInfo() {
+//     console.log(this.employees, this.employees.length);
+//   }
+// }
+
+abstract class Department {
   //   deptName: string;
   protected employees: string[] = [];
   static fiscalYear = 2022;
 
-  constructor(private readonly deptId: string, public deptName: string) {
+  constructor(protected readonly deptId: string, public deptName: string) {
     this.deptId = deptId;
     this.deptName = deptName;
   }
@@ -12,9 +39,7 @@ class Department {
     return { name };
   }
 
-  describe(this: Department) {
-    console.log("The department is: ", this.deptId, this.deptName);
-  }
+  abstract describe(this: Department): void;
 
   addEmployee(empName: string) {
     this.employees.push(empName);
@@ -30,6 +55,10 @@ class ITDepartment extends Department {
     super(deptId, "IT");
     this.admins = admins;
   }
+
+  describe() {
+    console.log("The department is: ", this.deptId, this.deptName);
+  }
 }
 
 class AccountingDepartment extends Department {
@@ -38,6 +67,10 @@ class AccountingDepartment extends Department {
   constructor(deptId: string, private reports: string[]) {
     super(deptId, "Accounting");
     this.lastReport = reports[0];
+  }
+
+  describe() {
+    console.log("The department is: ", this.deptId, this.deptName);
   }
 
   get mostRecentReport() {
@@ -78,6 +111,9 @@ accountingDepartment.addReport("Test Report 01");
 accountingDepartment.printReports();
 
 accountingDepartment.mostRecentReport = "Test Report 02";
+
+itDepartment.describe();
+accountingDepartment.describe();
 
 console.log(itDepartment, accountingDepartment);
 console.log(accountingDepartment.mostRecentReport);
