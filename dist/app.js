@@ -1,8 +1,4 @@
 "use strict";
-// class Department {
-//   //   deptName: string;
-//   protected employees: string[] = [];
-//   static fiscalYear = 2022;
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -18,23 +14,6 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-//   constructor(private readonly deptId: string, public deptName: string) {
-//     this.deptId = deptId;
-//     this.deptName = deptName;
-//   }
-//   static createEmployee(name: string) {
-//     return { name };
-//   }
-//   describe(this: Department) {
-//     console.log("The department is: ", this.deptId, this.deptName);
-//   }
-//   addEmployee(empName: string) {
-//     this.employees.push(empName);
-//   }
-//   printEmployeeInfo() {
-//     console.log(this.employees, this.employees.length);
-//   }
-// }
 var Department = /** @class */ (function () {
     function Department(deptId, deptName) {
         this.deptId = deptId;
@@ -47,6 +26,9 @@ var Department = /** @class */ (function () {
     Department.createEmployee = function (name) {
         return { name: name };
     };
+    Department.prototype.describe = function () {
+        console.log("The department is: ", this.deptId, this.deptName);
+    };
     Department.prototype.addEmployee = function (empName) {
         this.employees.push(empName);
     };
@@ -56,6 +38,25 @@ var Department = /** @class */ (function () {
     Department.fiscalYear = 2022;
     return Department;
 }());
+// abstract class Department {
+//   //   deptName: string;
+//   protected employees: string[] = [];
+//   static fiscalYear = 2022;
+//   constructor(protected readonly deptId: string, public deptName: string) {
+//     this.deptId = deptId;
+//     this.deptName = deptName;
+//   }
+//   static createEmployee(name: string) {
+//     return { name };
+//   }
+//   abstract describe(this: Department): void;
+//   addEmployee(empName: string) {
+//     this.employees.push(empName);
+//   }
+//   printEmployeeInfo() {
+//     console.log(this.employees, this.employees.length);
+//   }
+// }
 var ITDepartment = /** @class */ (function (_super) {
     __extends(ITDepartment, _super);
     function ITDepartment(deptId, admins) {
@@ -77,6 +78,13 @@ var AccountingDepartment = /** @class */ (function (_super) {
         _this.lastReport = reports[0];
         return _this;
     }
+    AccountingDepartment.getInstance = function (deptId, reports) {
+        if (AccountingDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment(deptId, reports);
+        return this.instance;
+    };
     AccountingDepartment.prototype.describe = function () {
         console.log("The department is: ", this.deptId, this.deptName);
     };
@@ -111,15 +119,16 @@ var AccountingDepartment = /** @class */ (function (_super) {
     return AccountingDepartment;
 }(Department));
 var itDepartment = new ITDepartment("DEPT_IT_01", ["Lakhani", "Abdul Moiz"]);
-var accountingDepartment = new AccountingDepartment("DEPT_ACC_01", []);
-accountingDepartment.addEmployee("Abdul Moiz");
-accountingDepartment.addEmployee("John Doe");
-accountingDepartment.addReport("Test Report 01");
-accountingDepartment.printReports();
-accountingDepartment.mostRecentReport = "Test Report 02";
+var accountingDepartment = AccountingDepartment.getInstance("DEPT_ACC_01", []);
+var accountingDepartment2 = AccountingDepartment.getInstance("DEPT_ACC_02", []);
+// accountingDepartment.addEmployee("Abdul Moiz");
+// accountingDepartment.addEmployee("John Doe");
+// accountingDepartment.addReport("Test Report 01");
+// accountingDepartment.printReports();
+// accountingDepartment.mostRecentReport = "Test Report 02";
 itDepartment.describe();
-accountingDepartment.describe();
-console.log(itDepartment, accountingDepartment);
+// accountingDepartment.describe();
+console.log(itDepartment, accountingDepartment, accountingDepartment2);
 console.log(accountingDepartment.mostRecentReport);
 console.log(Department.createEmployee("A. Moiz"), Department.fiscalYear);
 //# sourceMappingURL=app.js.map

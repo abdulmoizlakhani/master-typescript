@@ -1,36 +1,9 @@
-// class Department {
-//   //   deptName: string;
-//   protected employees: string[] = [];
-//   static fiscalYear = 2022;
-
-//   constructor(private readonly deptId: string, public deptName: string) {
-//     this.deptId = deptId;
-//     this.deptName = deptName;
-//   }
-
-//   static createEmployee(name: string) {
-//     return { name };
-//   }
-
-//   describe(this: Department) {
-//     console.log("The department is: ", this.deptId, this.deptName);
-//   }
-
-//   addEmployee(empName: string) {
-//     this.employees.push(empName);
-//   }
-
-//   printEmployeeInfo() {
-//     console.log(this.employees, this.employees.length);
-//   }
-// }
-
-abstract class Department {
+class Department {
   //   deptName: string;
   protected employees: string[] = [];
   static fiscalYear = 2022;
 
-  constructor(protected readonly deptId: string, public deptName: string) {
+  constructor(public readonly deptId: string, public deptName: string) {
     this.deptId = deptId;
     this.deptName = deptName;
   }
@@ -39,7 +12,9 @@ abstract class Department {
     return { name };
   }
 
-  abstract describe(this: Department): void;
+  describe(this: Department) {
+    console.log("The department is: ", this.deptId, this.deptName);
+  }
 
   addEmployee(empName: string) {
     this.employees.push(empName);
@@ -49,6 +24,31 @@ abstract class Department {
     console.log(this.employees, this.employees.length);
   }
 }
+
+// abstract class Department {
+//   //   deptName: string;
+//   protected employees: string[] = [];
+//   static fiscalYear = 2022;
+
+//   constructor(protected readonly deptId: string, public deptName: string) {
+//     this.deptId = deptId;
+//     this.deptName = deptName;
+//   }
+
+//   static createEmployee(name: string) {
+//     return { name };
+//   }
+
+//   abstract describe(this: Department): void;
+
+//   addEmployee(empName: string) {
+//     this.employees.push(empName);
+//   }
+
+//   printEmployeeInfo() {
+//     console.log(this.employees, this.employees.length);
+//   }
+// }
 
 class ITDepartment extends Department {
   constructor(deptId: string, public admins: string[]) {
@@ -63,10 +63,19 @@ class ITDepartment extends Department {
 
 class AccountingDepartment extends Department {
   private lastReport: string;
+  private static instance: AccountingDepartment;
 
-  constructor(deptId: string, private reports: string[]) {
+  private constructor(deptId: string, private reports: string[]) {
     super(deptId, "Accounting");
     this.lastReport = reports[0];
+  }
+
+  static getInstance(deptId: string, reports: string[]) {
+    if (AccountingDepartment.instance) {
+      return this.instance;
+    }
+    this.instance = new AccountingDepartment(deptId, reports);
+    return this.instance;
   }
 
   describe() {
@@ -103,18 +112,25 @@ class AccountingDepartment extends Department {
 }
 
 const itDepartment = new ITDepartment("DEPT_IT_01", ["Lakhani", "Abdul Moiz"]);
-const accountingDepartment = new AccountingDepartment("DEPT_ACC_01", []);
+const accountingDepartment = AccountingDepartment.getInstance(
+  "DEPT_ACC_01",
+  []
+);
+const accountingDepartment2 = AccountingDepartment.getInstance(
+  "DEPT_ACC_02",
+  []
+);
 
-accountingDepartment.addEmployee("Abdul Moiz");
-accountingDepartment.addEmployee("John Doe");
-accountingDepartment.addReport("Test Report 01");
-accountingDepartment.printReports();
+// accountingDepartment.addEmployee("Abdul Moiz");
+// accountingDepartment.addEmployee("John Doe");
+// accountingDepartment.addReport("Test Report 01");
+// accountingDepartment.printReports();
 
-accountingDepartment.mostRecentReport = "Test Report 02";
+// accountingDepartment.mostRecentReport = "Test Report 02";
 
 itDepartment.describe();
-accountingDepartment.describe();
+// accountingDepartment.describe();
 
-console.log(itDepartment, accountingDepartment);
+console.log(itDepartment, accountingDepartment, accountingDepartment2);
 console.log(accountingDepartment.mostRecentReport);
 console.log(Department.createEmployee("A. Moiz"), Department.fiscalYear);
