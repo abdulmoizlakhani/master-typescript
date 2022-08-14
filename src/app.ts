@@ -1,136 +1,46 @@
-class Department {
-  //   deptName: string;
-  protected employees: string[] = [];
-  static fiscalYear = 2022;
+// type AddFn = (a: number, b: number) => number;
+interface AddFn {
+  (a: number, b: number): number;
+}
 
-  constructor(public readonly deptId: string, public deptName: string) {
-    this.deptId = deptId;
-    this.deptName = deptName;
+let add: AddFn;
+
+add = (n1: number, n2: number) => {
+  return n1 + n2;
+};
+
+interface Named {
+  readonly name: string;
+  // readonly outputName?: string;
+}
+
+interface Greetable extends Named {
+  greet(phrase: string): void;
+}
+
+// type Greetable = {
+//   readonly name: string;
+
+//   greet(phrase: string): void;
+// };
+
+class Person implements Greetable {
+  name: string;
+  age: number;
+
+  constructor(n: string, age: number) {
+    this.name = n;
+    this.age = age;
   }
 
-  static createEmployee(name: string) {
-    return { name };
-  }
-
-  describe(this: Department) {
-    console.log("The department is: ", this.deptId, this.deptName);
-  }
-
-  addEmployee(empName: string) {
-    this.employees.push(empName);
-  }
-
-  printEmployeeInfo() {
-    console.log(this.employees, this.employees.length);
+  greet(phrase: string): void {
+    console.log(phrase, this.name);
   }
 }
 
-// abstract class Department {
-//   //   deptName: string;
-//   protected employees: string[] = [];
-//   static fiscalYear = 2022;
+let user1: Greetable;
 
-//   constructor(protected readonly deptId: string, public deptName: string) {
-//     this.deptId = deptId;
-//     this.deptName = deptName;
-//   }
+user1 = new Person("Abdul", 26);
+// user1.name = "Test User"; Can't update due to readonly
 
-//   static createEmployee(name: string) {
-//     return { name };
-//   }
-
-//   abstract describe(this: Department): void;
-
-//   addEmployee(empName: string) {
-//     this.employees.push(empName);
-//   }
-
-//   printEmployeeInfo() {
-//     console.log(this.employees, this.employees.length);
-//   }
-// }
-
-class ITDepartment extends Department {
-  constructor(deptId: string, public admins: string[]) {
-    super(deptId, "IT");
-    this.admins = admins;
-  }
-
-  describe() {
-    console.log("The department is: ", this.deptId, this.deptName);
-  }
-}
-
-class AccountingDepartment extends Department {
-  private lastReport: string;
-  private static instance: AccountingDepartment;
-
-  private constructor(deptId: string, private reports: string[]) {
-    super(deptId, "Accounting");
-    this.lastReport = reports[0];
-  }
-
-  static getInstance(deptId: string, reports: string[]) {
-    if (AccountingDepartment.instance) {
-      return this.instance;
-    }
-    this.instance = new AccountingDepartment(deptId, reports);
-    return this.instance;
-  }
-
-  describe() {
-    console.log("The department is: ", this.deptId, this.deptName);
-  }
-
-  get mostRecentReport() {
-    if (this.lastReport) {
-      return this.lastReport;
-    }
-    throw new Error("No report found!");
-  }
-
-  set mostRecentReport(report: string) {
-    if (!report) {
-      throw new Error("Please pass a valid value!");
-    }
-    this.addReport(report);
-  }
-
-  addEmployee(empName: string) {
-    if (empName === "John Doe") return;
-    this.employees.push(empName);
-  }
-
-  addReport(text: string) {
-    this.reports.push(text);
-    this.lastReport = text;
-  }
-
-  printReports() {
-    console.log(this.reports);
-  }
-}
-
-const itDepartment = new ITDepartment("DEPT_IT_01", ["Lakhani", "Abdul Moiz"]);
-const accountingDepartment = AccountingDepartment.getInstance(
-  "DEPT_ACC_01",
-  []
-);
-const accountingDepartment2 = AccountingDepartment.getInstance(
-  "DEPT_ACC_02",
-  []
-);
-
-// accountingDepartment.addEmployee("Abdul Moiz");
-// accountingDepartment.addEmployee("John Doe");
-// accountingDepartment.addReport("Test Report 01");
-// accountingDepartment.printReports();
-
-// accountingDepartment.mostRecentReport = "Test Report 02";
-
-itDepartment.describe();
-// accountingDepartment.describe();
-
-console.log(itDepartment, accountingDepartment, accountingDepartment2);
-console.log(accountingDepartment.mostRecentReport);
-console.log(Department.createEmployee("A. Moiz"), Department.fiscalYear);
+user1.greet("Hello, it's");
