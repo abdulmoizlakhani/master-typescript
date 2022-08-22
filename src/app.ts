@@ -1,46 +1,23 @@
-// type AddFn = (a: number, b: number) => number;
-interface AddFn {
-  (a: number, b: number): number;
-}
-
-let add: AddFn;
-
-add = (n1: number, n2: number) => {
-  return n1 + n2;
+type Admin = {
+  name: string;
+  privileges: string[];
 };
 
-interface Named {
-  readonly name: string;
-  // readonly outputName?: string;
-}
-
-interface Greetable extends Named {
-  greet(phrase: string): void;
-}
-
-// type Greetable = {
-//   readonly name: string;
-
-//   greet(phrase: string): void;
-// };
-
-class Person implements Greetable {
+type Employee = {
   name: string;
-  age: number;
+  startDate: Date;
+};
 
-  constructor(n: string, age: number) {
-    this.name = n;
-    this.age = age;
-  }
+// interface ElevatedEmployee extends Admin, Employee {}
+type ElevatedEmployee = Admin & Employee;
 
-  greet(phrase: string): void {
-    console.log(phrase, this.name);
-  }
-}
+const e1: ElevatedEmployee = {
+  name: "Abdul Moiz",
+  privileges: ["ALL_ACCESS"],
+  startDate: new Date(),
+};
 
-let user1: Greetable;
+type Combinable = string | number;
+type Numeric = number | boolean;
 
-user1 = new Person("Abdul", 26);
-// user1.name = "Test User"; Can't update due to readonly
-
-user1.greet("Hello, it's");
+type Universal = Combinable & Numeric;
