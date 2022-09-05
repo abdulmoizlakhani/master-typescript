@@ -67,4 +67,10 @@ moveAnimal({
     type: "horse",
     runningSpeed: 200,
 });
+// const userInput = <HTMLInputElement>document.getElementById("user-input")!;
+// const userInput = document.getElementById("user-input")! as HTMLInputElement;
+var userInput = document.getElementById("user-input");
+if (userInput) {
+    userInput.value = "This is user input!";
+}
 //# sourceMappingURL=app.js.map
