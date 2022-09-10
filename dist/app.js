@@ -10,6 +10,9 @@ function add(a, b) {
     }
     return a + b;
 }
+var resultNumber = add(7, 7);
+var resultString = add("Abdul Moiz", " Lakhani"); // but it's not optimal
+resultString.split(" ");
 function printEmployeeInformation(emp) {
     console.log("Name: ", emp.name);
     if ("privileges" in emp) {
