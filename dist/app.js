@@ -80,4 +80,10 @@ var errorBag = {
     email: "Not a valid email!",
     username: "Must start with a capital character!"
 };
+// Nullish Coalescing (??) => Trigger fall back value only if left side undefined or null
+var value = "" !== null && "" !== void 0 ? "" : "DEFAULT"; // Output: ""
+var value2 = undefined !== null && undefined !== void 0 ? undefined : "DEFAULT"; // Output: "DEFAULT"
+var value3 = null !== null && null !== void 0 ? null : "DEFAULT"; // Output: "DEFAULT"
+var value4 = 0 !== null && 0 !== void 0 ? 0 : "DEFAULT"; // Output: 0
+console.log(value, value2, value3, value4);
 //# sourceMappingURL=app.js.map

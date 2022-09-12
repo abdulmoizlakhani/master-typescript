@@ -131,3 +131,12 @@ const errorBag: ErrorContainer = {
   email: "Not a valid email!",
   username: "Must start with a capital character!"
 }
+
+// Nullish Coalescing (??) => Trigger fall back value only if left side undefined or null
+
+const value = "" ?? "DEFAULT" // Output: ""
+const value2 = undefined ?? "DEFAULT" // Output: "DEFAULT"
+const value3 = null ?? "DEFAULT" // Output: "DEFAULT"
+const value4 = 0 ?? "DEFAULT" // Output: 0
+
+console.log(value, value2, value3, value4);
