@@ -21,18 +21,27 @@ function merge<T extends object, U extends object>(obj1: T, obj2: U) {
 
 // console.log(data.name, data.age);
 
-interface Lengthy {
-  length: number;
+// interface Lengthy {
+//   length: number;
+// }
+
+// function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+//   let desc = "No Value!";
+//   if (element.length === 1) {
+//     desc = "Only 1 Element!!";
+//   } else if (element.length > 1) {
+//     desc = "This time " + element.length + " elements.";
+//   }
+//   return [element, desc];
+// }
+
+// console.log(countAndDescribe("Test"));
+
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
+  return "Value: " + obj[key];
 }
 
-function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
-  let desc = "No Value!";
-  if (element.length === 1) {
-    desc = "Only 1 Element!!";
-  } else if (element.length > 1) {
-    desc = "This time " + element.length + " elements.";
-  }
-  return [element, desc];
-}
-
-console.log(countAndDescribe("Test"));
+console.log(extractAndConvert({ title: "Product 1" }, "title"));

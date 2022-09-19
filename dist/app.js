@@ -12,15 +12,25 @@
 function merge(obj1, obj2) {
     return Object.assign(obj1, obj2);
 }
-function countAndDescribe(element) {
-    var desc = "No Value!";
-    if (element.length === 1) {
-        desc = "Only 1 Element!!";
-    }
-    else if (element.length > 1) {
-        desc = "This time " + element.length + " elements.";
-    }
-    return [element, desc];
+// const data = merge<{name: string}, {age: number}>({ name: "Abdul Moiz Lakhani" }, { age: 26 });
+// const data = merge({ name: "Abdul Moiz Lakhani" }, 33); // It will fail because 2nd argument is not an object
+// const data = merge({ name: "Abdul Moiz Lakhani" }, { age: 26 });
+// console.log(data.name, data.age);
+// interface Lengthy {
+//   length: number;
+// }
+// function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+//   let desc = "No Value!";
+//   if (element.length === 1) {
+//     desc = "Only 1 Element!!";
+//   } else if (element.length > 1) {
+//     desc = "This time " + element.length + " elements.";
+//   }
+//   return [element, desc];
+// }
+// console.log(countAndDescribe("Test"));
+function extractAndConvert(obj, key) {
+    return "Value: " + obj[key];
 }
-console.log(countAndDescribe("Test"));
+console.log(extractAndConvert({ title: "Product 1" }, "title"));
 //# sourceMappingURL=app.js.map
