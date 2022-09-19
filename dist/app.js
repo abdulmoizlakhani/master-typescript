@@ -78,9 +78,14 @@ dataStorage.addItem("John");
 dataStorage.addItem(30);
 dataStorage.removeItem(30);
 console.log(dataStorage);
-// const objDataStorage = new DataStorage<object>();
-// objDataStorage.addItem({ n: "a" });
-// objDataStorage.addItem({ b: 2 });
-// objDataStorage.removeItem({});
-// console.log(objDataStorage);
+function createCourseGoal(title, description, date) {
+    var courseGoal = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal;
+}
+var names = ["John", "Doe"];
+// names.push("Jack");
+// names.pop("Jack");
 //# sourceMappingURL=app.js.map
