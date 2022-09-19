@@ -1,6 +1,15 @@
 "use strict";
 // const names: Array<string> = []; // string[]
 // // names[0].split(" ");
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 // const promise: Promise<number> = new Promise((resolve, reject) => {
 //   setTimeout(() => {
 //     resolve(100);
@@ -29,8 +38,49 @@ function merge(obj1, obj2) {
 //   return [element, desc];
 // }
 // console.log(countAndDescribe("Test"));
-function extractAndConvert(obj, key) {
-    return "Value: " + obj[key];
-}
-console.log(extractAndConvert({ title: "Product 1" }, "title"));
+// function extractAndConvert<T extends object, U extends keyof T>(
+//   obj: T,
+//   key: U
+// ) {
+//   return "Value: " + obj[key];
+// }
+// console.log(extractAndConvert({ title: "Product 1" }, "title"));
+var DataStorage = /** @class */ (function () {
+    function DataStorage() {
+        this.data = [];
+    }
+    DataStorage.prototype.addItem = function (item) {
+        this.data.push(item);
+    };
+    DataStorage.prototype.removeItem = function (item) {
+        if (this.data.indexOf(item) === -1) {
+            return;
+        }
+        this.data.splice(this.data.indexOf(item), 1);
+    };
+    DataStorage.prototype.getItem = function () {
+        return __spreadArray([], this.data, true);
+    };
+    return DataStorage;
+}());
+// const dataStorage = new DataStorage<string>();
+// dataStorage.addItem("John");
+// dataStorage.addItem("Doe");
+// dataStorage.removeItem("John");
+// console.log(dataStorage);
+// const dataStorage = new DataStorage<number>();
+// dataStorage.addItem(20);
+// dataStorage.addItem(30);
+// dataStorage.removeItem(30);
+// console.log(dataStorage);
+var dataStorage = new DataStorage();
+dataStorage.addItem("John");
+dataStorage.addItem(30);
+dataStorage.removeItem(30);
+console.log(dataStorage);
+// const objDataStorage = new DataStorage<object>();
+// objDataStorage.addItem({ n: "a" });
+// objDataStorage.addItem({ b: 2 });
+// objDataStorage.removeItem({});
+// console.log(objDataStorage);
 //# sourceMappingURL=app.js.map

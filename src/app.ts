@@ -37,11 +37,58 @@ function merge<T extends object, U extends object>(obj1: T, obj2: U) {
 
 // console.log(countAndDescribe("Test"));
 
-function extractAndConvert<T extends object, U extends keyof T>(
-  obj: T,
-  key: U
-) {
-  return "Value: " + obj[key];
+// function extractAndConvert<T extends object, U extends keyof T>(
+//   obj: T,
+//   key: U
+// ) {
+//   return "Value: " + obj[key];
+// }
+
+// console.log(extractAndConvert({ title: "Product 1" }, "title"));
+
+class DataStorage<T extends string | number | boolean> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return;
+    }
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItem() {
+    return [...this.data];
+  }
 }
 
-console.log(extractAndConvert({ title: "Product 1" }, "title"));
+// const dataStorage = new DataStorage<string>();
+// dataStorage.addItem("John");
+// dataStorage.addItem("Doe");
+// dataStorage.removeItem("John");
+
+// console.log(dataStorage);
+
+// const dataStorage = new DataStorage<number>();
+// dataStorage.addItem(20);
+// dataStorage.addItem(30);
+// dataStorage.removeItem(30);
+
+// console.log(dataStorage);
+
+const dataStorage = new DataStorage<number | string>();
+dataStorage.addItem("John");
+dataStorage.addItem(30);
+dataStorage.removeItem(30);
+
+console.log(dataStorage);
+
+// const objDataStorage = new DataStorage<object>();
+// objDataStorage.addItem({ n: "a" });
+// objDataStorage.addItem({ b: 2 });
+// objDataStorage.removeItem({});
+
+// console.log(objDataStorage);
